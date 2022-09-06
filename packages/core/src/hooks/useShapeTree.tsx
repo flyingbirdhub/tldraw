@@ -135,6 +135,7 @@ export function useShapeTree<T extends TLShape, M extends Record<string, unknown
       // If the shape's parent is a different shape (e.g. a group),
       // add the parent to the sets of shapes to render. The parent's
       // children will all be rendered.
+      // 这里似乎是支持嵌套的
       const parent = page.shapes[shape.parentId]
 
       if (parent === undefined) {

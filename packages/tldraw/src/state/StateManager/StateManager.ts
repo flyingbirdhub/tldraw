@@ -65,6 +65,7 @@ export class StateManager<T extends Record<string, any>> {
     update?: (prev: T, next: T, prevVersion: number) => T
   ) {
     this._idbId = id
+    // 全部使用深拷贝
     this._state = deepCopy(initialState)
     this._snapshot = deepCopy(initialState)
     this.initialState = deepCopy(initialState)
@@ -77,6 +78,7 @@ export class StateManager<T extends Record<string, any>> {
       if (this._idbId) {
         message = 'restored'
 
+        // 用来使用indexeddb进行持久化
         idb
           .get(this._idbId)
           .then(async (saved) => {

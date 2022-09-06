@@ -57,6 +57,7 @@ export abstract class TLShapeUtil<T extends TLShape, E extends Element = any, M 
     return React.forwardRef(component)
   }
 
+  // 一个组件，定了了一些必要的入参，然后渲染出组件
   static Indicator = <T extends TLShape, M = any>(
     component: (props: {
       shape: T

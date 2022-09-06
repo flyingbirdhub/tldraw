@@ -23,6 +23,7 @@ export const ShapeIndicator = observer(function ShapeIndicator<T extends TLShape
   const { shapeUtils } = useTLContext()
   const utils = shapeUtils[shape.type]
   const bounds = utils.getBounds(shape)
+  // 根据bounds计算出绝对位置，利用CSS计算能力
   const rPositioned = usePosition(bounds, shape.rotation)
 
   return (

@@ -16,12 +16,12 @@ export const ShapeNode = observer(function ShapeNode<T extends TLShape>({
   ...rest
 }: ShapeNodeProps<T>) {
   return (
-    <>
-      <Shape shape={shape} utils={utils[shape.type as T['type']]} meta={meta} {...rest} />
+    // TODO 嵌套渲染
+    <Shape shape={shape} utils={utils[shape.type as T['type']]} meta={meta} {...rest}>
       {children &&
-        children.map((childNode) => (
+        (children.map((childNode) => (
           <ShapeNode key={childNode.shape.id} utils={utils} {...childNode} />
-        ))}
-    </>
+        )) as any)}
+    </Shape>
   )
 })

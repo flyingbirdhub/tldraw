@@ -10,6 +10,7 @@ export function useBoundsEvents() {
         if ((e as any).dead) return
         else (e as any).dead = true
         if (!inputs.pointerIsValid(e)) return
+        // 提供快捷键能力
         if (e.button === 2) {
           callbacks.onRightPointBounds?.(inputs.pointerDown(e, 'bounds'), e)
           return
@@ -45,6 +46,7 @@ export function useBoundsEvents() {
           callbacks.onDragBounds?.(inputs.pointerMove(e, 'bounds'), e)
         }
         const info = inputs.pointerMove(e, 'bounds')
+        console.log('move: ', info, e)
         callbacks.onPointerMove?.(info, e)
       },
       onPointerEnter: (e: React.PointerEvent) => {

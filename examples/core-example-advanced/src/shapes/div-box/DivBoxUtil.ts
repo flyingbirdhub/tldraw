@@ -2,17 +2,17 @@ import { TLBounds, Utils } from '@tldraw/core'
 import { intersectLineSegmentBounds } from '@tldraw/intersect'
 import { nanoid } from 'nanoid'
 import { CustomShapeUtil } from 'shapes/CustomShapeUtil'
-import { BoxComponent } from './BoxComponent'
-import { BoxIndicator } from './BoxIndicator'
-import type { BoxShape } from './BoxShape'
+import { DivBoxComponent } from './DivBoxComponent'
+import { DivBoxIndicator } from './DivBoxIndicator'
+import type { DivBoxShape } from './DivBoxShape'
 
-type T = BoxShape
-type E = SVGSVGElement
+type T = DivBoxShape
+type E = HTMLDivElement
 
-export class BoxUtil extends CustomShapeUtil<T, E> {
-  Component = BoxComponent
+export class DivBoxUtil extends CustomShapeUtil<T, E> {
+  Component = DivBoxComponent
 
-  Indicator = BoxIndicator
+  Indicator = DivBoxIndicator
 
   hideResizeHandles = false
 
@@ -37,12 +37,11 @@ export class BoxUtil extends CustomShapeUtil<T, E> {
 
   canBind = true
 
-  // 生成一份default schema, 用来进行初始化渲染
   getShape = (props: Partial<T>): T => {
     return {
       id: nanoid(),
-      type: 'box',
-      name: 'Box',
+      type: 'divBox',
+      name: 'DivBox',
       parentId: 'page1',
       point: [0, 0],
       size: [100, 100],

@@ -225,6 +225,7 @@ export function Tldraw({
     if (document.id === app.document.id) {
       app.updateDocument(document)
     } else {
+      // 将外部传入的文档加载到tldraw里面
       app.loadDocument(document)
     }
   }, [document, app])
@@ -240,6 +241,7 @@ export function Tldraw({
     app.changePage(currentPageId)
   }, [currentPageId, app])
 
+  // 支持设置readonly模式，针对多人协作应该比较有用处
   // Toggle the app's readOnly mode when the `readOnly` prop changes.
   React.useEffect(() => {
     app.readOnly = readOnly
@@ -259,6 +261,7 @@ export function Tldraw({
 
   // Update the app's callbacks when any callback changes.
   React.useEffect(() => {
+    // 给tldraw实例设置回调函数
     app.callbacks = {
       onMount,
       onChange,
@@ -366,6 +369,7 @@ const InnerTldraw = React.memo(function InnerTldraw({
   readOnly,
   showUI,
 }: InnerTldrawProps) {
+  // 获取外部初始化的tldraw实例
   const app = useTldrawApp()
   const [dialogContainer, setDialogContainer] = React.useState<any>(null)
 
@@ -377,6 +381,7 @@ const InnerTldraw = React.memo(function InnerTldraw({
 
   const isSelecting = state.appState.activeTool === 'select'
 
+  // 这里的document并不是全局的document
   const page = document.pages[appState.currentPageId]
   const pageState = document.pageStates[page.id]
   const assets = document.assets

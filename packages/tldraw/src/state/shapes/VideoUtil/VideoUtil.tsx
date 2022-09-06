@@ -51,6 +51,7 @@ export class VideoUtil extends TDShapeUtil<T, E> {
       const rVideo = React.useRef<HTMLVideoElement>(null)
       const rWrapper = React.useRef<HTMLDivElement>(null)
 
+      // shape也就是定义组件schema的地方
       const { currentTime = 0, size, isPlaying, style } = shape
 
       React.useLayoutEffect(() => {

@@ -45,6 +45,16 @@ export function Toolbar({ activeStates, lastEvent }: ToolbarProps) {
             <ArrowUpRight />
           </Highlight>
         </PrimaryToolButton>
+        <PrimaryToolButton id="divBox" isActive={machine.isIn('divBox')} onClick={onToolSelect}>
+          <Highlight>
+            <Square />
+          </Highlight>
+        </PrimaryToolButton>
+        <PrimaryToolButton id="stack" isActive={machine.isIn('stack')} onClick={onToolSelect}>
+          <Highlight>
+            <Square />
+          </Highlight>
+        </PrimaryToolButton>
       </PrimaryTools>
       <StatusBar>
         <div>

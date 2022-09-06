@@ -58,8 +58,10 @@ export const Page = observer(function _Page<T extends TLShape, M extends Record<
 
   // Does the selected shape have handles?
   let shapeWithHandles: TLShape | undefined = undefined
+  // page.shapes即是页面中的组件，根据selectId获取到页面上的组件
   const selectedShapes = selectedIds.map((id) => page.shapes[id])
 
+  // 选中一个组件
   if (selectedShapes.length === 1) {
     const shape = selectedShapes[0]
     _isEditing = editingId === shape.id
@@ -74,9 +76,11 @@ export const Page = observer(function _Page<T extends TLShape, M extends Record<
   return (
     <>
       {bounds && <BoundsBg bounds={bounds} rotation={rotation} isHidden={hideBounds} />}
+      {/* 渲染组件 */}
       {shapeTree.map((node) => (
         <ShapeNode key={node.shape.id} utils={shapeUtils} {...node} />
       ))}
+      {/* 两个框，一个选中框，一个hover框 */}
       {!_hideIndicators &&
         selectedShapes.map((shape) => (
           <ShapeIndicator
@@ -109,6 +113,7 @@ export const Page = observer(function _Page<T extends TLShape, M extends Record<
           hideCloneHandles={_hideCloneHandles}
         />
       )}
+      {/* 非规则型handler */}
       {!hideHandles && shapeWithHandles && <Handles shape={shapeWithHandles} zoom={zoom} />}
     </>
   )

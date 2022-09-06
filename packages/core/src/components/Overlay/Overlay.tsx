@@ -18,6 +18,7 @@ export const Overlay = observer<MyProps>(function Overlay({ camera: { zoom, poin
           />
         </g>
       </defs>
+      {/* 通过children渲染辅助线的地方 */}
       <g transform={`scale(${zoom}) translate(${point})`}>{children}</g>
     </svg>
   )

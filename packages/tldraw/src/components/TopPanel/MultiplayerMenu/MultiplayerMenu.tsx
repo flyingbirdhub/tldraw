@@ -81,6 +81,7 @@ export const MultiplayerMenu = function MultiplayerMenu() {
         }
       }
 
+      // 多人协作能力
       const result = await fetch(`/api/create`, {
         method: 'POST',
         mode: 'no-cors',

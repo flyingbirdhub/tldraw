@@ -147,6 +147,7 @@ export interface TDCallbacks {
   onPersist?: (app: TldrawApp) => void
   /**
    * (optional) A callback to run when the user undos.
+   * 这里是一个callback，哪里做了undo这个功能呢
    */
   onUndo?: (app: TldrawApp) => void
   /**
@@ -209,6 +210,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
     [TDShapeType.Sticky]: new StickyTool(this),
   }
 
+  // 当前的选择工具
   currentTool: BaseTool = this.tools.select
 
   session?: TldrawSession
@@ -243,6 +245,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   fileSystemHandle: FileSystemFileHandle | null = null
 
+  //获取规则的尺寸表示
   viewport = Utils.getBoundsFromPoints([
     [0, 0],
     [100, 100],
@@ -576,6 +579,7 @@ export class TldrawApp extends StateManager<TDSnapshot> {
 
   onUndo = () => {
     this.rotationInfo.selectedIds = [...this.selectedIds]
+    // 通知外部事件
     this.callbacks.onUndo?.(this)
   }
 

@@ -379,6 +379,88 @@ export const machine = createState({
         },
       },
     },
+    divBox: {
+      onEnter: 'setTransformPerformanceMode',
+      initial: 'idle',
+      states: {
+        idle: {
+          on: {
+            STARTED_POINTING: {
+              do: 'setInitialPoint',
+              to: 'divBox.pointing',
+            },
+          },
+        },
+        pointing: {
+          on: {
+            MOVED_POINTER: {
+              if: 'hasLeftDeadZone',
+              to: 'divBox.creating',
+            },
+            STOPPED_POINTING: {
+              to: 'divBox.idle',
+            },
+          },
+        },
+        creating: {
+          onEnter: ['createDivBoxShape', 'setSnapshot'],
+          on: {
+            TOGGLED_MODIFIER: 'transformSelectedShapes',
+            MOVED_POINTER: 'transformSelectedShapes',
+            PANNED: 'transformSelectedShapes',
+            CANCELLED: {
+              do: 'deleteSelectedShapes',
+              to: 'select',
+            },
+            STOPPED_POINTING: {
+              do: 'addToHistory',
+              to: 'select',
+            },
+          },
+        },
+      },
+    },
+    stack: {
+      onEnter: 'setTransformPerformanceMode',
+      initial: 'idle',
+      states: {
+        idle: {
+          on: {
+            STARTED_POINTING: {
+              do: 'setInitialPoint',
+              to: 'stack.pointing',
+            },
+          },
+        },
+        pointing: {
+          on: {
+            MOVED_POINTER: {
+              if: 'hasLeftDeadZone',
+              to: 'stack.creating',
+            },
+            STOPPED_POINTING: {
+              to: 'stack.idle',
+            },
+          },
+        },
+        creating: {
+          onEnter: ['createStackShape', 'setSnapshot'],
+          on: {
+            TOGGLED_MODIFIER: 'transformSelectedShapes',
+            MOVED_POINTER: 'transformSelectedShapes',
+            PANNED: 'transformSelectedShapes',
+            CANCELLED: {
+              do: 'deleteSelectedShapes',
+              to: 'select',
+            },
+            STOPPED_POINTING: {
+              do: 'addToHistory',
+              to: 'select',
+            },
+          },
+        },
+      },
+    },
   },
   conditions: {
     hasLeftDeadZone(data, payload: TLPointerInfo) {

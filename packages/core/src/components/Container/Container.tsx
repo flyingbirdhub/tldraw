@@ -24,6 +24,10 @@ export const Container = observer<ContainerProps>(function Container({
 }) {
   const rPositioned = usePosition(bounds, rotation)
 
+  /**
+   * TODO：这些样式计算对于容器组件嵌套子组件场景并不合适
+   * 容器中嵌套子组件的场景需要开发新的container
+   */
   return (
     <div
       id={id}

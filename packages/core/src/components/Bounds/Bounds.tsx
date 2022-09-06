@@ -54,6 +54,8 @@ export const Bounds = observer<BoundsProps>(function Bounds({
   const showResizeHandles = !hideResizeHandles && !isLocked
 
   return (
+    // 编辑线的容器，不太明白这个容器为什么比真实组件大很多
+    // rotation-->可以跟随组件旋转
     <Container bounds={bounds} rotation={rotation}>
       <SVGContainer>
         <CenterHandle bounds={bounds} isLocked={isLocked} isHidden={isHidden} />
