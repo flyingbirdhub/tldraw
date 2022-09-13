@@ -48,7 +48,9 @@ export function removeShapesFromPage(data: TDSnapshot, ids: string[], pageId: st
 
   parentsToUpdate.forEach((parent) => {
     if (ids.includes(parent.id)) return
+    // 为什么把parent.id也加进来呢？有点奇怪--是为了记录有改动的组件吗
     deletedIds.add(parent.id)
+    // 更新父组件的children属性
     before.shapes[parent.id] = { children: parent.children }
     after.shapes[parent.id] = { children: parent.children.filter((id) => !ids.includes(id)) }
     if (after.shapes[parent.id]?.children!.length === 0) {
